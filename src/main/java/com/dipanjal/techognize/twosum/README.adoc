@@ -1,0 +1,105 @@
+
+:tag_two_sum: Two Sum
+:url_two_sum: https://leetcode.com/problems/two-sum/
+
+= #1 {url_two_sum}[{tag_two_sum}, window="_blank"]
+
+:toc:
+
+https://leetcode.com/[#LeedCode, window="_blank"]
+
+== Target
+`nums = [2,11,7,15]`
+
+_taget_ = 9
+
+_output_ = [0,2]
+====
+NOTE: Because nums[0] + nums[2] == 9, so we return [0, 2]. sequence doesn't matter
+====
+
+== Solution 1
+Brute Force Approach
+====
+NOTE: Time Complexity O(n^2)
+====
+
+we will pick a number and sum that number with other numbers in the array one by one and match with the target.
+
+.Looping through the array n[...]
+* Loop 1. for n in nums, example: first Picking *2* | `O(n)`
+** x = target - n;
+** Loop 2. searching for *x* in nums[...] | `O(n*n) = O(n^2)`
+*** if found
+**** then return
+*** Otherwise
+----
+continue...
+until we found the x, or the array is completely traversed.
+----
+
+=== Time Complexity Analysis
+.The world is not a bed of roses, so all the Time Complexity analysis will be considered for `worst-case` scenarios.
+
+* Loop 1 has time complexity O(n)
+
+** Loop 2 is a Nested loop in Loop 1, Hence time complexity is O(n^2)
+
+So the Time Complexity of the program will be
+
+Loop 1 TC + Loop 2 TC = Grater TC among them.
+
+====
+NOTE: O(n) + O(n^2) = O(n^2) because n^2 > n
+====
+
+=== What's wrong with O(n^2) ?
+Since O(n^2) is greater than O(n) is will take much time to solve the problem, which will lead to a dramatic slowness for a large dataset. In other words, when the dataset is big, the system will perform too slow, because our algorithm (the problem solving technique) is not optimized.
+
+====
+Assume that we have `n=8` number of elements in the array.
+So the Time complexity will be
+
+NOTE: O(n^2) = 8^2 = 64
+====
+
+=== Root Cause
+the problem is in our searching algorithm. Our searching algorithm is not optimized enough to search the next element in constant time O(1).
+
+==== Can we solve the problem in O(n) time ?
+The answer is yes we can just by optimizing our searching algorithm. Instead of running a Nested loop we can just lookup by using https://www.javatpoint.com/working-of-hashmap-in-java[HashMap] (*a data structure that maps keys to values for highly efficient lookup*) which provides searching in Constant Time `O(1)`
+
+====
+NOTE: Lookup Time Complexity = O(1)
+====
+==== How ?
+Well that's a different discussion, can be found in the Bibliography. But the basic idea is it depends on the Hashing algorithm. However, Java provides a very convenient hash function implemented in `hashCode()`
+
+== Solution 2
+Brute Force with Lookup
+====
+NOTE: Time Complexity O(n)
+====
+
+.Looping through the array nums[...]
+* Loop 1. for n in nums | O(n)
+** x = target - n;
+** Lookup for *x* | O(1)
+*** if found
+**** then return
+*** Otherwise
+----
+continue...
+until we found the target, or the array is completely traversed.
+----
+
+=== Time Complexity Analysis
+* Loop 1 has time complexity O(n)
+
+** Lookup in Hashmap time complexity is O(1)
+
+====
+NOTE: Time Complexity: O(n) + O(1) = O(n) because n > 1
+====
+
+Well this is a pretty good solution, instantly cutting of *O(n^2)* time to *O(n)*

@@ -33,6 +33,7 @@ public class Palindrome {
         return true;
     }
 
+    /** TWO POINTER APPROACH (Optimized) */
     public static boolean isPalindromeOptimal(String s){
         int start = 0;
         int end = s.length() - 1;

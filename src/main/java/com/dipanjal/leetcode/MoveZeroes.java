@@ -15,6 +15,7 @@ public class MoveZeroes {
         int zeroIndex = 0;
         for(int i=0; i<nums.length; i++){
             if(nums[i] != 0){
+                /** SWAP ;) */
                 int temp = nums[zeroIndex];
                 nums[zeroIndex++] = nums[i];
                 nums[i] = temp;

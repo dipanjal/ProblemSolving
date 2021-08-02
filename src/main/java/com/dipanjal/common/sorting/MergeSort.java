@@ -16,7 +16,7 @@ public class MergeSort {
         step = 0;
     }
 
-    private enum Sorting {
+    public enum Sorting {
         ASC,
         DESC
     }

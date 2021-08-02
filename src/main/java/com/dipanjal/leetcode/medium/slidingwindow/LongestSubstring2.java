@@ -20,23 +20,27 @@ public class LongestSubstring2 {
     public static int lengthOfLongestSubstring(String s){
         if(s == null || s.isEmpty()) return 0;
 
-        int start = 0, max = 0;
+        int slow = 0, max = 0;
         Set<Character> seen = new HashSet<>();
-        for(int i=0; i<s.length(); i++){
-            char c = s.charAt(i);
+        for(int fast=0; fast<s.length(); fast++){
+            char c = s.charAt(fast);
+
+            /* While the Set Contains the currently pointed Element */
             while(seen.contains(c)){
-                seen.remove(s.charAt(start++));
+                /** Remove Elements from the Hashset */
+                seen.remove(s.charAt(slow++));
             }
             seen.add(c);
-            max = Math.max(max, (i - start) + 1);
+            int winLength = (fast - slow) + 1; //The New Windows Length
+            max = Math.max(max, winLength); //Comparing the Max Length with the New Length
         }
         return max;
     }
 
     public static void main(String[] args) {
-        System.out.println(lengthOfLongestSubstring("abcabcbb"));
-        System.out.println(lengthOfLongestSubstring("bbbbb"));
+//        System.out.println(lengthOfLongestSubstring("abcabcbb"));
+//        System.out.println(lengthOfLongestSubstring("bbbbb"));
         System.out.println(lengthOfLongestSubstring("pwwkew"));
-        System.out.println(lengthOfLongestSubstring(""));
+//        System.out.println(lengthOfLongestSubstring(""));
     }
 }

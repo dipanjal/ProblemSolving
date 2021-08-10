@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode;
+package com.dipanjal.leetcode.easy;
 
 import java.util.Arrays;
 
@@ -20,7 +20,7 @@ public class RemoveDuplicatesFromSortedArray {
             if(nums[slowIndex]  != nums[fastIndex])
                 nums[++slowIndex] = nums[fastIndex];
 
-        return slowIndex+1;
+        return slowIndex+1; // index + 1 = length
     }
 
     public static void main(String[] args) {

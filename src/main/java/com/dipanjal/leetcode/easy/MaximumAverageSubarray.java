@@ -20,7 +20,7 @@ Output: 12.75000
 Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
  */
 
-public class MaxSubArr1 {
+public class MaximumAverageSubarray {
     public static double findMaxAverage(int[] nums, int k) {
         double sum = 0.0;
         for(int i=0; i<k; i++)

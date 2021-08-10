@@ -11,6 +11,16 @@ import java.util.Set;
 /*
     1763. Longest Nice Substring
     URL: https://leetcode.com/problems/longest-nice-substring/
+
+Example 1:
+    Input: s = "YazaAay"
+    Output: "aAa"
+    Explanation: "aAa" is a nice string because 'A/a' is the only letter of the alphabet in s, and both 'A' and 'a' appear.
+    "aAa" is the longest nice substring.
+Example 2:
+    Input: s = "c"
+    Output: ""
+    Explanation: There are no nice substrings.
  */
 
 public class LongestNiceSubstring {

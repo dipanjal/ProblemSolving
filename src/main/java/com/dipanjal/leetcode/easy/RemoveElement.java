@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode;
+package com.dipanjal.leetcode.easy;
 
 import java.util.Arrays;
 
@@ -14,12 +14,12 @@ public class RemoveElement {
     public static int removeElement(int[] nums, int val) {
         if (nums.length == 0) return 0;
 
-        int validIndex = 0;
+        int lengthCounter = 0;
         for(int i=0; i<nums.length; i++)
             if(nums[i]  != val)
-                nums[validIndex++] = nums[i];
+                nums[lengthCounter++] = nums[i];
 
-        return validIndex;
+        return lengthCounter;
     }
 
     public static void main(String[] args) {

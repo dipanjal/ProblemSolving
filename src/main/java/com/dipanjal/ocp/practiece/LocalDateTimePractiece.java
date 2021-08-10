@@ -17,7 +17,7 @@ import java.util.stream.Stream;
  * @since 4/17/2021
  */
 
-public class LocalizationTest {
+public class LocalDateTimePractiece {
 
     public static void testLocalFormatting(Locale locale){
         BigDecimal price = BigDecimal.valueOf(1199.99);

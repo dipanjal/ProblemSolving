@@ -1,6 +1,7 @@
-package com.dipanjal.leetcode;
+package com.dipanjal.leetcode.easy;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @author dipanjal
@@ -24,9 +25,13 @@ public class MoveZeroes {
     }
 
     public static void main(String[] args) {
-        int[] nums = {0,1,0,3,12};
+        int[] nums = {2,1,5,3,12};
         moveZeroes(nums);
-        Arrays.stream(nums)
-                .forEach(System.out::println);
+        System.out.println(
+                Arrays.stream(nums)
+                        .mapToObj(String::valueOf)
+                        .collect(Collectors.joining(", "))
+        );
+
     }
 }

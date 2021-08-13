@@ -8,6 +8,7 @@ package com.dipanjal.leetcode.easy;
 /*
 643. Maximum Average Subarray I
 url: https://leetcode.com/problems/maximum-average-subarray-i/
+Explanation: https://www.youtube.com/watch?v=JzCoSQm8eLc
 
 You are given an integer array nums consisting of n elements, and an integer k.
 
@@ -20,6 +21,9 @@ Output: 12.75000
 Explanation: Maximum average is (12 - 5 - 6 + 50) / 4 = 51 / 4 = 12.75
  */
 
+/**
+ * Sliding windows
+ */
 public class MaximumAverageSubarray {
     public static double findMaxAverage(int[] nums, int k) {
         double sum = 0.0;
@@ -29,11 +33,13 @@ public class MaximumAverageSubarray {
         double max = sum;
 
         for(int i = k; i<nums.length; i++){
+            //Sliding the Windows and Adding new item nums[i]
+            // and Removing the Previous one nums[i-k] from the sum
             sum = sum + nums[i] - nums[i-k];
-            max = Math.max(max, sum);
+            max = Math.max(max, sum); //max sum
         }
 
-        return max/k;
+        return max/k; //max avg
     }
 
 

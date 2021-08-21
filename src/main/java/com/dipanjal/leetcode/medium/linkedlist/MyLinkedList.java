@@ -123,6 +123,29 @@ public class MyLinkedList {
 
     }
 
+    public Node removeNthFromEnd(Node head, int n) {
+        int nthNode = (this.size - n);
+        Node prevNode = null;
+        int count = 0;
+        while(head != null) {
+            if(count == nthNode - 1){
+                prevNode = head;
+            }
+            if(count == nthNode){
+                if(prevNode != null){
+                    prevNode.next = head.next;
+                    head.next = null;
+                    return head;
+                }
+                System.out.printf("[%d] -> [%d]%n", count, head.val);
+            }
+            head = head.next;
+            count++;
+        }
+        System.out.println("-------------------------");
+        return head;
+    }
+
     public void traverse(){
         Node node = this.head;
         int count = 0;
@@ -133,10 +156,19 @@ public class MyLinkedList {
         System.out.println("-------------------------");
     }
 
+
     public static void main(String[] args) {
         MyLinkedList linkedList = new MyLinkedList();
-        linkedList.addAtHead(1);
+        linkedList.addAtTail(1);
+        linkedList.addAtTail(2);
         linkedList.addAtTail(3);
+        linkedList.addAtTail(4);
+        linkedList.addAtTail(5);
+        linkedList.removeNthFromEnd(linkedList.head, 2);
+        linkedList.traverse();
+
+//        linkedList.addAtHead(1);
+//        linkedList.addAtTail(3);
         /*testAddToHead(linkedList);
         testAddToTail(linkedList);
         testAddAtIndex(linkedList);

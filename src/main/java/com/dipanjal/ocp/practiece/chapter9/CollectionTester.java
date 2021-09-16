@@ -82,6 +82,17 @@ public class CollectionTester {
         System.out.println(productList.size());
     }
 
+    private static void removeIfTestWithImmutableList(){
+        List<Product> productList = List.of(
+                new Product("Tea", 10.00),
+                new Product("Coffee", 15.00),
+                new Product(null, 15.00)
+        );
+
+        productList.removeIf(p -> p.getName()==null); //it will fail
+        System.out.println(productList.size());
+    }
+
     private static void collectionSortingTest(SortOrder sortOrder){
         List<Product> productList = new ArrayList<>();
         productList.add(new Product("Coffee", 25.00));
@@ -113,8 +124,9 @@ public class CollectionTester {
 //        hashMapTest();
 //        listTest2();
 //        removeIfTest();
-        collectionSortingTest(SortOrder.DESCENDING);
+//        collectionSortingTest(SortOrder.DESCENDING);
 //        setsTest();
+        removeIfTestWithImmutableList();
     }
 
 

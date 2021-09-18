@@ -15,9 +15,9 @@ public class MergeTwoSortedList {
        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode runner = new ListNode(-1);
-        ListNode newHead = runner;
+    public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode newHead = new ListNode(-1);
+        ListNode runner = newHead;
 
         while(l1 != null && l2 != null) {
             if(l1.val < l2.val){
@@ -40,5 +40,21 @@ public class MergeTwoSortedList {
             runner.next = l2;
 
         return newHead.next; //because we want to ignore the initial dummyHead -1
+    }
+
+    public static void travarse(ListNode head) {
+        while(head != null) {
+            String arrow = head.next != null ? "->" : "";
+            System.out.print(head.val+arrow);
+            head = head.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        ListNode l1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+        ListNode l2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+
+        ListNode merged = mergeTwoLists(l1, l2);
+        travarse(merged);
     }
 }

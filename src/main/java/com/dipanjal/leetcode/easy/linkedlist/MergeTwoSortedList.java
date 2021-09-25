@@ -17,27 +17,27 @@ public class MergeTwoSortedList {
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
         ListNode newHead = new ListNode(-1);
-        ListNode runner = newHead;
+        ListNode tail = newHead;
 
         while(l1 != null && l2 != null) {
             if(l1.val < l2.val){
-                runner.next = l1;
+                tail.next = l1;
                 l1 = l1.next;
             }else {
-                runner.next = l2;
+                tail.next = l2;
                 l2 = l2.next;
             }
-            runner = runner.next;
+            tail = tail.next;
         }
 
         /** Now collect the reminders if has */
         /* means: L1 Has some nodes remains to be collected */
         if(l1 != null)
-            runner.next = l1;
+            tail.next = l1;
 
         /* means: L2 Has some nodes remains to be collected */
         if(l2 != null)
-            runner.next = l2;
+            tail.next = l2;
 
         return newHead.next; //because we want to ignore the initial dummyHead -1
     }

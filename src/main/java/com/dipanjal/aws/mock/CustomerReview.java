@@ -77,6 +77,7 @@ public class CustomerReview {
         repo.add("moneypot");
         repo.add("monitor");
         repo.add("mousepad");
+        repo.add("bird");
         List<List<String>> result = searchSuggestions(repo, "mouse");
 
         result.forEach(strings -> {

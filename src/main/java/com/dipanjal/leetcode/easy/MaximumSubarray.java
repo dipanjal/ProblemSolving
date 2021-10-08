@@ -3,7 +3,7 @@ package com.dipanjal.leetcode.easy;
 /**
  * @author dipanjal
  * @since 0.0.1
- * 53. Maximum Subarray
+ * 53. Maximum Sum of Contiguous Subarray
  * https://leetcode.com/problems/maximum-subarray/
  */
 public class MaximumSubarray {
@@ -55,6 +55,22 @@ public class MaximumSubarray {
      * explanation: https://www.youtube.com/watch?v=jnoVtCKECmQ
      */
     public static int maxSubArray3(int[] nums) {
+        int maxSum = nums[0];
+        int currentMaxSum = nums[0];
+
+        for(int i=1; i<nums.length; i++){
+            currentMaxSum = Math.max(currentMaxSum + nums[i], nums[i]);
+            maxSum = Math.max(currentMaxSum, maxSum);
+        }
+        return maxSum;
+    }
+
+    /**
+     * Kadane's Algorithm
+     * Time Complexity: O(n)
+     * explanation: https://www.youtube.com/watch?v=jnoVtCKECmQ
+     */
+    public static int maxSubArray4(int[] nums) {
         int maxSum = nums[0];
         int currentMaxSum = nums[0];
 

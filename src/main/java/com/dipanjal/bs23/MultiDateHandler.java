@@ -8,34 +8,27 @@ import java.util.Locale;
 
 public class MultiDateHandler {
 
-    private static List<String> expectedDateFormats = List.of(
+    private static final List<String> expectedDateFormats = List.of(
             "yyyy/MM/dd", "dd/MM/yyyy", "MM-dd-yyyy", "yyyyMMdd"
     );
 
-    private static String convertDateStr(String sourceDateStr, String destDateFormat) {
-        for (String pattern : expectedDateFormats) {
-            try{
-                LocalDate sourceDate = LocalDate.parse(sourceDateStr, DateTimeFormatter.ofPattern(pattern));
-                return sourceDate.format(DateTimeFormatter.ofPattern(destDateFormat, Locale.ENGLISH));
-            }catch (Exception e){
+    private static List<String> convertDateStr(List<String> dateList) {
+        String destDateFormat = "yyyyMMdd";
+        List<String> resultList = new ArrayList<>();
+        for (String sourceDateStr : dateList){
+            for (String pattern : expectedDateFormats) {
+                try{
+                    LocalDate sourceDate = LocalDate.parse(sourceDateStr, DateTimeFormatter.ofPattern(pattern));
+                    String destDateStr = sourceDate.format(DateTimeFormatter.ofPattern(destDateFormat, Locale.ENGLISH));
+                    resultList.add(destDateStr);
+                }catch (Exception ignored){}
             }
         }
-        return null;
+        return resultList;
     }
 
     public static void main(String[] args) {
-        List<String> dateList = List.of(
-               "2010/02/20",  "19/12/2016",
-                "11-18-2012", "20130720"
-        );
-
-        List<String> resultList = new ArrayList<>();
-        for (String str : dateList){
-            String dateStr = convertDateStr(str, "yyyyMMdd");
-            if(dateStr != null){
-                resultList.add(dateStr);
-                System.out.println("Input:"+str+" -- Output:"+dateStr);
-            }
-        }
+        List<String> resultList = convertDateStr(List.of("2010/02/20",  "19/12/2016", "11-18-2012", "20130720"));
+        resultList.forEach(System.out::println);
     }
 }

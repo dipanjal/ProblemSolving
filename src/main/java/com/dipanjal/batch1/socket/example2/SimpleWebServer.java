@@ -36,17 +36,16 @@ public class SimpleWebServer {
                 System.out.println("Client connected...");
 
                 request = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                int lineNo = 1;
                 String line = request.readLine();
                 String path = "";
                 while(!line.isEmpty()) {
-
-                    if(line.startsWith("GET")) {
-                        String[] parts = line.trim().split(" ");
-                        path = parts[1];
+                    if(lineNo == 1) {
+                        path = extractPathFromLine(line);
                     }
-
                     System.out.println("From Client: "+line);
                     line = request.readLine();
+                    lineNo++;
                 }
                 response = new PrintWriter(client.getOutputStream(), true);
                 sendHttpResponse(path, response);
@@ -58,6 +57,14 @@ public class SimpleWebServer {
             System.out.println("--------------");
             listenAndRespond();
         }
+    }
+
+    private String extractPathFromLine(String line) {
+        if(line.startsWith("GET") || line.startsWith("POST")) {
+            String[] parts = line.trim().split(" ");
+            return parts[1];
+        }
+        return "";
     }
 
     private void closeClientConnection(Socket client, BufferedReader request, PrintWriter response) throws IOException {

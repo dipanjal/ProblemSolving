@@ -10,19 +10,19 @@ import java.util.Scanner;
 public class PingClient {
 
     private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private PrintWriter request;
+    private BufferedReader response;
 
 
     public void startConnection(String ip, int port) throws IOException {
         clientSocket = new Socket(ip, port);
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        request = new PrintWriter(clientSocket.getOutputStream(), true);
+        response = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
     public String sendMessage(String msg) throws IOException {
-        out.println(msg);
-        String serverResponse = in.readLine();
+        request.println(msg);
+        String serverResponse = response.readLine();
         return serverResponse;
     }
 
@@ -36,5 +36,9 @@ public class PingClient {
             if(input.equals("bye")) break;
             System.out.println(client.sendMessage(input));
         }
+
+/*        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        System.out.println(client.sendMessage(input));*/
     }
 }

@@ -11,7 +11,7 @@ public class RequestRouter {
     public void routePath(String path, PrintWriter response) {
         response.println("HTTP/1.1 200 OK");
         response.println("Content-Type: text/html");
-        response.println();
+        response.println(); // \r\n
 
         String content = pageNotFoundHtml();
 

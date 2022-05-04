@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Locale;
 
 public class PingServer {
 
@@ -25,42 +26,42 @@ public class PingServer {
     }
 
     private void listenAndRespond() throws IOException {
-        Socket client = null;
+        Socket clientSocket = null;
         BufferedReader request = null;
         PrintWriter response = null;
-
         try{
             while(!server.isClosed()) {
-                client = server.accept();
+                clientSocket = server.accept(); //listening, BLocking I/O
                 System.out.println(++count+" Client connected...");
 
                 request = new BufferedReader(
-                        new InputStreamReader(client.getInputStream())
+                        new InputStreamReader(clientSocket.getInputStream())
                 );
 
-                response = new PrintWriter(client.getOutputStream(), true);
+                response = new PrintWriter(clientSocket.getOutputStream(), true);
 
                 String inputLine;
                 while ((inputLine = request.readLine()) != null) {
-                    response.println(inputLine);
+                    System.out.println("From Client: "+inputLine);
+                    response.println("From Server: "+inputLine.toUpperCase());
                 }
             }
-        }catch (SocketException e){
-            releaseDisconnectedClient(client, request, response);
+        }catch (SocketException se){
+            releaseDisconnectedClient(clientSocket, request, response);
             listenAndRespond();
         }
     }
 
-    private void releaseDisconnectedClient(Socket client, BufferedReader request, PrintWriter response) throws IOException {
+    private void releaseDisconnectedClient(Socket clientSocket, BufferedReader request, PrintWriter response) throws IOException {
         count--;
         System.out.println("Client disconnected");
         if(request != null) request.close();
         if(response != null) response.close();
-        if(client != null) client.close();
+        if(clientSocket != null) clientSocket.close();
     }
 
     public static void main(String[] args) throws IOException {
-        PingServer server = new PingServer(5000);
-        server.start();
+        PingServer server1 = new PingServer(5000);
+        server1.start();
     }
 }

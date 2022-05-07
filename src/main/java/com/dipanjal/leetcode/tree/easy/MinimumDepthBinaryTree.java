@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode.easy.tree;
+package com.dipanjal.leetcode.tree.easy;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

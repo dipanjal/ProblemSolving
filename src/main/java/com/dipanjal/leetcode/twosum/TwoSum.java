@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode.easy.twosum;
+package com.dipanjal.leetcode.twosum;
 
 import java.util.*;
 

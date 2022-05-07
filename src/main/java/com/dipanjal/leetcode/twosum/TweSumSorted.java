@@ -1,8 +1,6 @@
-package com.dipanjal.leetcode.easy.twosum;
+package com.dipanjal.leetcode.twosum;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author dipanjal

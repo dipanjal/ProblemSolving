@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode.easy.linkedlist;
+package com.dipanjal.leetcode.linkedlist;
 
 import com.dipanjal.common.LinkList;
 import com.dipanjal.common.LinkList.Node;

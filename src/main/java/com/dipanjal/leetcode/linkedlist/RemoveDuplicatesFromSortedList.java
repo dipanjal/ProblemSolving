@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode.easy.linkedlist;
+package com.dipanjal.leetcode.linkedlist;
 
 /**
  * @author dipanjal

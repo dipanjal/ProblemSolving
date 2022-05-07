@@ -1,7 +1,5 @@
 package com.dipanjal.leetcode.medium.linkedlist;
 
-import com.dipanjal.leetcode.easy.linkedlist.MiddleOfLinkedList;
-
 /**
  * @author dipanjal
  * @since 0.0.1

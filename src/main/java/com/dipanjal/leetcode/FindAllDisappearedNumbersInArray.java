@@ -1,4 +1,4 @@
-package com.dipanjal.leetcode.easy;
+package com.dipanjal.leetcode;
 
 import java.util.ArrayList;
 import java.util.HashSet;

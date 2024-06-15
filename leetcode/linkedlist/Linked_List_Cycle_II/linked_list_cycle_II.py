@@ -36,8 +36,7 @@ class Solution:
         # let's find the begining node where the cycle has started
         curr = head
         # we know that at some point curr and slow will meet eachother,
-        # according to the Floyed's algorithm
-        
+        # according to the Floyed's algorithm 
         # the loop will stop when both of the pointers meet with eachother
         # and the meeting point is the begining of the cycle
         while curr != slow:

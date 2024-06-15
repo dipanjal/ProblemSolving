@@ -45,3 +45,27 @@ class Solution:
         
         # we have found the meeting point hence the begining node of the cycle
         return curr
+
+def main():
+    # Create nodes
+    head = ListNode(3)
+    node2 = ListNode(2)
+    node0 = ListNode(0)
+    node4 = ListNode(-4)
+
+    # Connect nodes to form a cycle: 3 -> 2 -> 0 -> -4 -> 2
+    head.next = node2
+    node2.next = node0
+    node0.next = node4
+    node4.next = node2  # Cycle here
+
+    # Detect cycle
+    cycle_node = Solution().detectCycle(head)
+
+    if cycle_node:
+        print("Cycle detected at node with value:", cycle_node.val)
+    else:
+        print("No cycle detected")
+
+if __name__ == "__main__":
+    main()

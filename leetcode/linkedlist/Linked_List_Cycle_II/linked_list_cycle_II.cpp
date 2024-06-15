@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <cstddef>
+using namespace std;
 
 // Definition for singly-linked list.
 struct ListNode {
@@ -54,3 +55,35 @@ public:
         return curr;
     }
 };
+
+int main() {
+    // Create nodes
+    ListNode* head = new ListNode(3);
+    ListNode* node2 = new ListNode(2);
+    ListNode* node0 = new ListNode(0);
+    ListNode* node4 = new ListNode(-4);
+
+    // Connect nodes to form a cycle: 3 -> 2 -> 0 -> -4 -> 2
+    head->next = node2;
+    node2->next = node0;
+    node0->next = node4;
+    node4->next = node2; // Cycle here
+
+    // Detect cycle
+    Solution solution;
+    ListNode* cycleNode = solution.detectCycle(head);
+
+    if (cycleNode) {
+        cout << "Cycle detected at node with value: " << cycleNode->val << endl;
+    } else {
+        cout << "No cycle detected" << endl;
+    }
+
+    // Clean up memory (Note: in a real-world scenario, you should carefully manage memory, especially with cycles)
+    delete head;
+    delete node2;
+    delete node0;
+    delete node4;
+
+    return 0;
+}

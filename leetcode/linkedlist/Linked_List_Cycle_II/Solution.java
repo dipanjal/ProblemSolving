@@ -53,4 +53,29 @@ public class Solution {
         // we have found the meeting point hence the begining node of the cycle
         return curr;
     }
+
+    // Ignore the main function
+    public static void main(String[] args) {
+        // Create nodes
+        ListNode head = new ListNode(3);
+        ListNode node2 = new ListNode(2);
+        ListNode node0 = new ListNode(0);
+        ListNode node4 = new ListNode(-4);
+        
+        // Connect nodes to form a cycle: 3 -> 2 -> 0 -> -4 -> 2
+        head.next = node2;
+        node2.next = node0;
+        node0.next = node4;
+        node4.next = node2; // Cycle here
+
+        // Detect cycle
+        Solution solution = new Solution();
+        ListNode cycleNode = solution.detectCycle(head);
+
+        if (cycleNode != null) {
+            System.out.println("Cycle detected at node with value: " + cycleNode.val);
+        } else {
+            System.out.println("No cycle detected");
+        }
+    }
 }

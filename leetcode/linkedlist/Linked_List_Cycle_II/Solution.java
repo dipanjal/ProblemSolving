@@ -4,17 +4,16 @@
  * Difficulty: Medium
  */
 
-
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
- 
 public class Solution {
+    class ListNode {
+        int val;
+        ListNode next;
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+    
     public ListNode detectCycle(ListNode head) {
         // first need to confirm that the linked list has a cycle
         // explanation for linked list cycle detection

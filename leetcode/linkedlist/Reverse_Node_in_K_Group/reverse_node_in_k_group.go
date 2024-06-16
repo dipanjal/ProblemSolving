@@ -1,3 +1,7 @@
+// Leetcode 25 | Reverse Nodes in K Group
+// Difficulty: Hard
+// Editorial: https://dipanjals-notebook.vercel.app/leetcode/linked-list/reverse-nodes-in-k-group/
+
 package main
 
 import "fmt"

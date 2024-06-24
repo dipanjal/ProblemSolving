@@ -20,18 +20,18 @@ class DoublyLinkedList:
     def remove(self, node: Node):
         prevNode = node.prev
         nextNode = node.next
+        # unlink the node from the linked list
         prevNode.next = nextNode
         nextNode.prev = prevNode
     
     def addBeforeTail(self, node: Node):
-        nextNode = self.tail
         prevNode = self.tail.prev
-        
-        node.next = nextNode
+        # connecting node with next and prev node
+        node.next = self.tail
         node.prev = prevNode
-        
+        # connecting prev node and tail node with the new node
         prevNode.next = node
-        nextNode.prev = node
+        self.tail.prev = node
 
     def removeAfterHead(self) -> Node:
         firstNode = self.head.next

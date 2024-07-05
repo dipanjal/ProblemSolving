@@ -1,3 +1,7 @@
+# Leetcode: 206 | Reverse Linked List (Recursive)
+# Difficulty: Easy
+# Editorial: https://dipanjals-notebook.vercel.app/leetcode/linked-list/reverse-a-linked-list-recursive/
+
 from typing import Optional
 
 

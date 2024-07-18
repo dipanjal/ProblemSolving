@@ -2,7 +2,7 @@
 # Problem: https://leetcode.com/problems/find-the-duplicate-number/description/
 # Difficulty: Medium
 # Editorial: TBA
-# Video Explanation: TBA
+# Video Explanation: https://youtu.be/H-9XTaM22bo
 
 from typing import List
 

@@ -1,6 +1,5 @@
 from collections import deque
-
-from leetcode.tree.basics.tree_utils import TreeBuilder, TreeNode
+from tree_utils import TreeNode, TreeBuilder
 
 
 class TreeTraversal:
@@ -55,15 +54,15 @@ class Main:
         root = TreeBuilder(input).build()
         # print(root.data)
         print("In-order Traversal")
-        TreeTraversal().in_order(root)
+        TreeTraversal.in_order(root)
         print("")
         print("Pre-order Travelsal")
-        TreeTraversal().pre_order(root)
+        TreeTraversal.pre_order(root)
         print("")
         print("Post-order Travelsal")
-        TreeTraversal().post_order(root)
+        TreeTraversal.post_order(root)
         print("")
         print("Level-order Travelsal")
-        TreeTraversal().level_order(root)
+        TreeTraversal.level_order(root)
         print("")
 

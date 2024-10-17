@@ -56,7 +56,7 @@ class SolutionRecur:
         return check(l=0, r=len(s)-1)
 
 
-# Boilerplate Codes
+# -------------- Boilerplate Codes ---------------
 def runIterativeTest(test_suites: list[dict]):
     print("Running test for iterative approach")
     si = SolutionIter()

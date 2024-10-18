@@ -1,3 +1,6 @@
+# https://www.youtube.com/watch?v=AxNNVECce8c&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=6
+# TC: O(2^N)
+# SC: O(N) where n is the length of the array so the depth of the recursion tree
 def printAllSubsequence(nums: list[int]):
     def printSub(i, sub: list[int]):
         

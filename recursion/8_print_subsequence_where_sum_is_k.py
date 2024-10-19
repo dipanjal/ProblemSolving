@@ -41,6 +41,7 @@ def printAllSubsequence(nums: list[int], k: int):
 
 
 # Print Any One Subsequence where Sumation is K
+# https://youtu.be/eQCS_v3bw0Q?feature=shared&t=703
 def printAnySubsequence(nums: list[int], k: int):
     def printSub(i, sub: list[int], sum):
         if sum > k:

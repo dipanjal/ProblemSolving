@@ -1,3 +1,9 @@
+# https://youtu.be/eQCS_v3bw0Q?feature=shared&t=1395
+# For every index there are 2 possibilities (take | not take)
+# The size of the array nums = n which is also the depth of the recursion tree
+# so the Time Complexity = O(2^n)
+# Space Complexity = O(n) where n is the depth of recursion tree
+
 def countNumOfSubsequence(nums: list[int], k: int):
     def count(i, sub: list[int], sum: int):
         # all numbers are positive, so we can say when the sum is already grater that K

@@ -17,9 +17,16 @@ class SolutionTabulation {
         return ways[n];
     }
     public static void main(String[] args) {
-        int n = 45;
+        int n = 45, expected = 1836311903;
         System.out.println("Solution Tabulation");
         SolutionTabulation soltab = new SolutionTabulation();
-        System.out.println(soltab.climbStairs(n));
+        int actual = soltab.climbStairs(n);
+        System.out.println(actual);
+        
+        if (actual == expected) {
+            System.out.println("Test Passed");
+        } else {
+            System.out.println("Test Failed");
+        }
     }
 }

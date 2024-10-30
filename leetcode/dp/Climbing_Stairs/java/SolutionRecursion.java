@@ -15,9 +15,16 @@ class SolutionRecursion {
         return climbStairs(n-2) + climbStairs(n-1);
     }
     public static void main(String[] args) {
-        int n = 45;
+        int n = 45, expected = 1836311903;
         System.out.println("Solution Recursion");
         SolutionRecursion solrecur = new SolutionRecursion();
-        System.out.println(solrecur.climbStairs(n));
+        int actual = solrecur.climbStairs(n);
+        System.out.println(actual);
+        
+        if (actual == expected) {
+            System.out.println("Test Passed");
+        } else {
+            System.out.println("Test Failed");
+        }
     }
 }

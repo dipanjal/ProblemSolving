@@ -26,9 +26,16 @@ class SolutionMemo {
         }
     }
     public static void main(String[] args) {
-        int n = 45;
+        int n = 45, expected = 1836311903;
         System.out.println("Solution Memo");
         SolutionMemo solmemo = new SolutionMemo();
-        System.out.println(solmemo.climbStairs(n));
+        int actual = solmemo.climbStairs(n);
+        System.out.println(actual);
+        
+        if (actual == expected) {
+            System.out.println("Test Passed");
+        } else {
+            System.out.println("Test Failed");
+        }
     }
 }

@@ -26,7 +26,7 @@ class SolutionMemo {
         }
     }
     public static void main(String[] args) {
-          int n = 45;
+        int n = 45;
         System.out.println("Solution Memo");
         SolutionMemo solmemo = new SolutionMemo();
         System.out.println(solmemo.climbStairs(n));

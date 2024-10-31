@@ -22,6 +22,7 @@ class JavaRunner:
         os.system(f"javac {file}")
         return class_name
 
+
     def run_java(self, class_name):
         # check if the class file does not exist
         if not os.path.exists(f"{class_name}.class"):
@@ -29,6 +30,7 @@ class JavaRunner:
             exit(1) 
         logger.info(f"Running {class_name}")
         os.system(f"java {class_name}")
+
 
     def clean_up(self, class_name):
         logger.debug(f"Cleaning up {class_name}")
@@ -47,18 +49,13 @@ class JavaRunner:
         # check if the directory exists
         if not os.path.exists(self.source_directory_abs):
             raise FileNotFoundError(f"Directory {self.source_directory_abs} does not exist")
-
         # check if the directory contains any java files
         if not any(file.endswith(".java") for file in os.listdir(self.source_directory_abs)):
             raise FileNotFoundError(f"Directory {self.source_directory_abs} does not contain any java files")
-
+        
         # change the working directory to the java directory
         os.chdir(self.source_directory_abs)
-
-        # print current working directory
         logger.debug(f"Current directory: {os.getcwd()}")
-        
-        # process the java files in the directory
         self.process_java_files()
 
 

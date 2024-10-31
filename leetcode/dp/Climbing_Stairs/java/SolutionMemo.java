@@ -35,7 +35,7 @@ class SolutionMemo {
         if (actual == expected) {
             System.out.println("Test Passed");
         } else {
-            System.out.println("Test Failed");
+            System.out.println("Test Failed: Expected " + expected + ", Actual " + actual);
         }
     }
 }

@@ -40,6 +40,7 @@ class Validator:
                 raise FileNotFoundError(f"{prefix} {path} does not exist")
             return False
         return True
+    
     @classmethod
     def contains_file(cls, source_dir: str, file_extention: str) -> bool:
         # check if the directory contains any java files
@@ -70,6 +71,7 @@ class PythonRunner(CodeRunner):
             extension=CodeExtension.PYTHON
         )
 
+
     @log_execution_time
     def run(self, executable_file):
         # check if the class file does not exist
@@ -78,7 +80,7 @@ class PythonRunner(CodeRunner):
         logger.info(f"Running {executable_file}")
         os.system(f"python {executable_file}")
 
-    
+
     def process_files(self):
         for file in os.listdir(self.source_directory_abs):
             if file.endswith(self.extension.value):
@@ -92,6 +94,7 @@ class JavaRunner(CodeRunner):
             debug,
             extension=CodeExtension.JAVA
         )
+
 
     def _compile_java(self, file):
         class_name = file.split('.')[0]
@@ -150,7 +153,8 @@ class Main:
         parser.add_argument('--debug', type=bool, required=False, help='enable debug mode')
         args = parser.parse_args()
         return vars(args)
-    
+
+
     @classmethod
     def process_directory(cls, runner: CodeRunner):
         # check if the directory exists
@@ -194,6 +198,7 @@ class Main:
             except Exception as e:
                 logger.error(f"Error: {e}")
                 raise e
+
 
     @classmethod
     def main(cls, source_directory_abs: str, DEBUG: bool):

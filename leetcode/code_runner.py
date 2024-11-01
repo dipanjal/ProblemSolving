@@ -14,6 +14,39 @@ class CodeType(Enum):
     JAVA = "java"
     PYTHON = "python"
 
+class FallbackPaths(Enum):
+    JAVA = [
+        "java", "Java",
+        "javaCode", "JavaCode", 
+        "java_code", "Java_Code",
+        "JavaSolution", "javaSolution", 
+        "java_solution", "Java_Solution",
+    ]
+    PYTHON = [
+        "python", "Python",
+        "pythonCode", "PythonCode", 
+        "python_code", "Python_Code",
+        "PythonSolution", "pythonSolution",
+        "python_solution", "Python_Solution"
+    ]
+
+
+class Validator:
+    @classmethod
+    def exists(cls, path: str, throw_error: bool=False) -> bool:
+        prefix = "Directory" if os.path.isdir(path) else "File"
+        if not os.path.exists(path):
+            if throw_error:
+                raise FileNotFoundError(f"{prefix} {path} does not exist")
+            return False
+        return True
+    @classmethod
+    def contains_file(cls, source_dir: str, file_extention: str) -> bool:
+        # check if the directory contains any java files
+        if not any(file.endswith(file_extention) for file in os.listdir(source_dir)):
+            raise FileNotFoundError(f"Directory {source_dir} does not contain any {file_extention} files")
+
+
 class CodeRunner:
     def __init__(self, source_directory_abs: str, debug: bool=False, extension: CodeExtension=None):
         self.source_directory_abs = source_directory_abs
@@ -40,17 +73,16 @@ class PythonRunner(CodeRunner):
     @log_execution_time
     def run(self, executable_file):
         # check if the class file does not exist
-        if not os.path.exists(f"{executable_file}"):
+        if not Validator.exists(executable_file):
             raise FileNotFoundError(f"Python file {executable_file} does not exist")
         logger.info(f"Running {executable_file}")
         os.system(f"python {executable_file}")
 
-
+    
     def process_files(self):
         for file in os.listdir(self.source_directory_abs):
             if file.endswith(self.extension.value):
                 self.run(file)
-                print("--------------------------------")
     
 
 class JavaRunner(CodeRunner):
@@ -64,8 +96,7 @@ class JavaRunner(CodeRunner):
     def _compile_java(self, file):
         class_name = file.split('.')[0]
         # check if the java file does not exist
-        if not os.path.exists(file):
-            raise FileNotFoundError(f"File {file} does not exist")
+        Validator.exists(file, throw_error=True)
         logger.debug(f"Compiling {file}")
         os.system(f"javac {file}")
         return class_name
@@ -79,7 +110,7 @@ class JavaRunner(CodeRunner):
     @log_execution_time
     def run(self, executable_file):
         # check if the class file does not exist
-        if not os.path.exists(f"{executable_file}.class"):
+        if not Validator.exists(f"{executable_file}.class"):
             raise FileNotFoundError(f"Class file {executable_file}.class does not exist")
         logger.info(f"Running {executable_file}")
         os.system(f"java {executable_file}")
@@ -87,25 +118,17 @@ class JavaRunner(CodeRunner):
 
     def process_files(self):
         for file in os.listdir(self.source_directory_abs):
-            if file.endswith(self.type.value):
+            if file.endswith(self.extension.value):
                 class_name = self._compile_java(file)
                 self.run(class_name)
                 self._clean_up(class_name)
-                print("--------------------------------")
 
 
-class Validator:
+class Helper:
     @classmethod
-    def exists(cls, path: str) -> bool:
-        prefix = "Directory" if os.path.isdir(path) else "File"
-        if not os.path.exists(path):
-            raise FileNotFoundError(f"{prefix} {path} does not exist")
-            
-    @classmethod
-    def contains_file(cls, source_dir: str, file_extention: str) -> bool:
-        # check if the directory contains any java files
-        if not any(file.endswith(file_extention) for file in os.listdir(source_dir)):
-            raise FileNotFoundError(f"Directory {source_dir} does not contain any {file_extention} files")
+    def get_suggestive_paths(cls, runner: CodeRunner) -> FallbackPaths:
+        return FallbackPaths[runner.extension.name]
+
 
 class RunnerFactory:
     @classmethod
@@ -140,14 +163,17 @@ class Main:
         try:
             runner.process_files()
         except Exception as e:
-            logger.error(f"Error: {e}")
+            logger.error(f"Error: {e}", exc_info=True)
 
 
     # if the given directory does not contain any java files, 
     # search for the suggestive paths inside the given directory
     @classmethod
-    def execute_with_suggestive_paths(cls, runner: CodeRunner, suggestive_paths: list[str]):
+    def execute_with_suggestive_paths(cls, runner: CodeRunner):
         s_dir_abs = runner.source_directory_abs
+        suggestive_paths = Helper.get_suggestive_paths(runner).value
+        logger.debug(f"Suggestive paths: {suggestive_paths}")
+
         counter = 0
         while counter < len(suggestive_paths):
             try:
@@ -158,6 +184,13 @@ class Main:
                 logger.info(f"Searching for /{suggestive_paths[counter]} nested directory")
                 runner.source_directory_abs = os.path.join(s_dir_abs, suggestive_paths[counter])
                 counter += 1
+                # print logs if no suggestive paths are found
+                if counter == len(suggestive_paths):
+                    logger.error("No suggestive paths found for %s", s_dir_abs)
+                    logger.info(
+                        "Try placing your code in one of the following directories: \n%s",
+                        "\n".join(suggestive_paths)
+                    )
             except Exception as e:
                 logger.error(f"Error: {e}")
                 raise e
@@ -165,13 +198,7 @@ class Main:
     @classmethod
     def main(cls, source_directory_abs: str, DEBUG: bool):
         runner = RunnerFactory.get_runner(cli_args['type'])(source_directory_abs, DEBUG)
-        logger.info(f"Runner: {runner}")
-        suggestive_paths = [
-            "java", "Java",
-            "javaCode", "JavaCode", "java_code",
-            "JavaSolution", "javaSolution", "java_solution"
-        ]
-        cls.execute_with_suggestive_paths(runner, suggestive_paths)
+        cls.execute_with_suggestive_paths(runner)
 
 
 if __name__ == "__main__":

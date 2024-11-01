@@ -23,5 +23,6 @@ def log_execution_time(func):
         
         formatted_time = format_execution_time(elapsed_time_ms)
         print(f"{func.__name__} executed in {formatted_time}")
+        print("---------------------------------------------")
         return result
     return wrapper

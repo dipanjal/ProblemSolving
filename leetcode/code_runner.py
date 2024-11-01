@@ -1,4 +1,4 @@
-# runner to run all the java files in the given directory
+# runner to run all codes in the given directory
 
 import os, argparse, logging
 from enum import Enum

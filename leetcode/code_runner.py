@@ -120,7 +120,8 @@ class JavaRunner(CodeRunner):
 
     def _clean_up(self, class_name):
         logger.debug(f"Cleaning up {class_name}")
-        os.system(f"rm -f {class_name}.class")
+        # remove all class files with the given class name
+        os.system(f"rm -f {class_name}*.class")
 
 
     @log_execution_time

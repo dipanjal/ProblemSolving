@@ -7,7 +7,7 @@ import java.util.*;
 // Space Complexity: O(n) 
 // using array to store previous min costs as we climb up until we reach at the top floor
 
-public class SolutionTabOptimized {
+public class SolutionTabulationOptimized {
     
     public int minCostClimbingStairs(int[] cost) {
         int numOfStairs = cost.length;
@@ -59,7 +59,7 @@ public class SolutionTabOptimized {
             ));
         }};
 
-        SolutionTabOptimized sol = new SolutionTabOptimized();
+        SolutionTabulationOptimized sol = new SolutionTabulationOptimized();
         testCases.stream()
             .filter(testCase -> !(boolean)testCase.getOrDefault("skip", false))
             .forEach(testCase -> {

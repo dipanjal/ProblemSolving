@@ -2,7 +2,7 @@
 # 746. Min Cost Climbing Stairs
 
 from typing import List
-from perf import log_execution_time
+from leetcode.dp.Min_Cost_Climbing_Stairs.archive.perf import log_execution_time
 import sys
 # Recursion | Top Down | Dynamic Programming
 # Time Complexity: O(2^n) because for every step we have two options (either 1 step down or 2 step down)

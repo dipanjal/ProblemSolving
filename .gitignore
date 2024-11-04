@@ -38,3 +38,6 @@ build/
 __pycache__/
 *.py[cod]
 *$py.class
+
+# excluding experimentals
+leetcode/experimentals

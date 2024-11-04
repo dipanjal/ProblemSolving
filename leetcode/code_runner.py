@@ -6,6 +6,7 @@ from utils import log_execution_time
 from abc import ABC, abstractmethod
 
 logger = logging.getLogger(__name__)
+MAX_TIMEOUT = 5  # seconds
 
 class CodeExtension(Enum):
     JAVA = ".java"
@@ -90,14 +91,15 @@ class PythonRunner(CodeRunner):
             debug,
             extension=CodeExtension.PYTHON
         )
+    
+    def _execute(self, python_file):
+        print(f"Running {python_file}")
+        os.system(f"python {python_file}")
 
-
-    @log_execution_time
     def run(self, python_file):
         if not Validator.exists(python_file):
             raise FileNotFoundError(f"Python file {python_file} does not exist")
-        logger.info(f"Running {python_file}")
-        os.system(f"python {python_file}")
+        log_execution_time(self._execute, timeout=MAX_TIMEOUT)(python_file)
 
 
 class JavaRunner(CodeRunner):
@@ -124,18 +126,17 @@ class JavaRunner(CodeRunner):
         os.system(f"rm -f {class_name}*.class")
 
 
-    @log_execution_time
     def _execute(self, class_name):
         # check if the class file does not exist
         if not Validator.exists(f"{class_name}.class"):
             raise FileNotFoundError(f"Class file {class_name}.class does not exist")
-        logger.info(f"Running {class_name}")
+        print(f"Running {class_name}")
         os.system(f"java {class_name}")
 
 
     def run(self, java_file):
         class_name = self._compile_java(java_file)
-        self._execute(class_name)
+        log_execution_time(self._execute, timeout=MAX_TIMEOUT)(class_name)
         self._clean_up(class_name)
 
 

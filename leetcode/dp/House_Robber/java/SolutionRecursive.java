@@ -2,6 +2,7 @@ import java.util.*;
 
 // https://leetcode.com/problems/house-robber/
 // 198. House Robber
+// Recursive | Top Down | Brute Force
 // Time Complexity: O(2^n) -> exponential: because we are making two recursive calls for n number of houses
 // Space Complexity: O(n) -> recursive stack space
 public class SolutionRecursive {

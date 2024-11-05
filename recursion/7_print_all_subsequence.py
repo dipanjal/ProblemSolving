@@ -1,5 +1,7 @@
 # https://www.youtube.com/watch?v=AxNNVECce8c&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=6
-# TC: O(2^N)
+# TC: O(2^N) because we are making two calls for each element
+# we are either including or excluding the current element in the subsequence
+# this is the take and not take approach
 # SC: O(N) where n is the length of the array so the depth of the recursion tree
 def printAllSubsequence(nums: list[int]):
     def printSub(i, sub: list[int]):

@@ -1,7 +1,9 @@
 # Print Subsequences where Sumation is K
 # https://www.youtube.com/watch?v=eQCS_v3bw0Q&list=PLgUwDviBIf0rGlzIn_7rsaR2FQ5e6ZOL9&index=8
 
-# TC: O(2^N)
+# TC: O(2^N) because we are making two calls for each element
+# we are either including or excluding the current element in the subsequence
+# this is the take and not take approach
 # SC: O(N) where n is the length of the array so the depth of the recursion tree
 def printAllSubsequence(nums: list[int], k: int):
     def printSub(i, sub: list[int], sum):

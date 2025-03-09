@@ -74,11 +74,11 @@ class CodeRunner(ABC):
     
 
     def process_directory(self):
-        # check if the directory exists
+        # check if the source directory exists and contains the given extension files
         Validator.exists(self.source_directory_abs)
         Validator.contains_file(self.source_directory_abs, self.extension.value)
         
-        # change the working directory to the code directory
+        # cd into code directory where all the code files are present
         os.chdir(self.source_directory_abs)
         logger.debug(f"Current directory: {os.getcwd()}")
         try:
@@ -189,8 +189,8 @@ def execute_with_suggestive_paths(runner: CodeRunner):
             runner.process_directory()
             break
         except FileNotFoundError as e:
-            logger.error(f"Error: {e}")
-            logger.info(f"Searching for /{suggestive_paths[counter]} nested directory")
+            logger.debug(f"Error: {e}")
+            logger.debug(f"Searching for /{suggestive_paths[counter]} nested directory")
             runner.source_directory_abs = os.path.join(s_dir_abs, suggestive_paths[counter])
             counter += 1
             # print logs if no suggestive paths are found

@@ -2,7 +2,7 @@
 
 import os, argparse, logging
 from enum import Enum
-from utils import log_execution_time
+from utils import log_execution_time, PythonUtils
 from abc import ABC, abstractmethod
 
 logger = logging.getLogger(__name__)
@@ -51,7 +51,12 @@ class Validator:
 
 
 class CodeRunner(ABC):
-    def __init__(self, source_directory_abs: str, debug: bool=False, extension: CodeExtension=None):
+    def __init__(
+        self, 
+        source_directory_abs: str, 
+        debug: bool=False, 
+        extension: CodeExtension=None
+    ):
         self.source_directory_abs = source_directory_abs
         self.DEBUG = debug
         logging.basicConfig(
@@ -73,7 +78,7 @@ class CodeRunner(ABC):
         Validator.exists(self.source_directory_abs)
         Validator.contains_file(self.source_directory_abs, self.extension.value)
         
-        # change the working directory to the java directory
+        # change the working directory to the code directory
         os.chdir(self.source_directory_abs)
         logger.debug(f"Current directory: {os.getcwd()}")
         try:
@@ -91,14 +96,28 @@ class PythonRunner(CodeRunner):
             debug,
             extension=CodeExtension.PYTHON
         )
+        self.IGNORE_FILES = {"__init__.py", "utils.py"}
+        PythonUtils.set_python_path(logger)
+    
+    def _is_ignored(self, file):
+        return file in self.IGNORE_FILES
+
     
     def _execute(self, python_file):
         print(f"Running {python_file}")
         os.system(f"python {python_file}")
+            
 
     def run(self, python_file):
         if not Validator.exists(python_file):
             raise FileNotFoundError(f"Python file {python_file} does not exist")
+        
+        # ignore the files in the ignore list such as [__init__.py, utils.py]
+        if self._is_ignored(python_file):
+            logger.debug(f"Ignoring {python_file}")
+            return
+        
+        # execute the python code file
         log_execution_time(self._execute, timeout=MAX_TIMEOUT)(python_file)
 
 

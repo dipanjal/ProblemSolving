@@ -1,3 +1,4 @@
+import json
 import timeit
 from functools import wraps
 import multiprocessing
@@ -47,3 +48,37 @@ def format_execution_time(elapsed_time_ms):
             return f"{elapsed_time_sec:.2f} seconds"
     else:
         return f"{elapsed_time_ms:.3f} ms"
+
+
+class JSONUtil:
+    @staticmethod
+    def to_json(data):
+        return json.dumps(data, indent=4)
+
+    @staticmethod
+    def from_json(data):
+        return json.loads(data)
+    
+    @staticmethod
+    def from_json_file(file):
+        with open(file, "r") as f:
+            return json.load(f)
+
+class PythonUtils:
+    @staticmethod
+    def set_python_path(logger=None):
+        from pathlib import Path
+        import os
+
+        # # Get the current working directory
+        # current_directory = os.getcwd()
+
+        # Get the parent directory of the current working directory
+        parent_directory = Path.cwd().parent
+
+        # Set PYTHONPATH to the parent directory
+        os.environ["PYTHONPATH"] = str(parent_directory)
+
+        if logger:
+            # Print to verify the PYTHONPATH
+            logger.debug(f"PYTHONPATH set to: {os.environ['PYTHONPATH']}")

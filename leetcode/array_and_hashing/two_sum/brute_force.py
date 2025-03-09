@@ -3,7 +3,7 @@
 # TC: O(n^2) | SC: O(1)
 
 from typing import List
-
+from leetcode.array_and_hashing.two_sum import TEST_CASE
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
@@ -22,22 +22,9 @@ class Solution:
     
 # Test cases
 def test():
-    test_suites = [
-        {
-            "input": {"nums": [2, 7, 11, 15], "target": 9},
-            "expected": [0, 1]
-        },
-        {
-            "input": {"nums": [3, 2, 4], "target": 6},
-            "expected": [1, 2]
-        },
-        {
-            "input": {"nums": [3, 3], "target": 6},
-            "expected": [0, 1]
-        }
-    ]
+    # test_suites = JSONUtil.from_json_file("./leetcode/array_and_hashing/1_Two_Sum/test_cases.json")
     sol =  Solution()
-    for i, test_suite in enumerate(test_suites):
+    for i, test_suite in enumerate(TEST_CASE):
         try:
             assert sol.twoSum(**test_suite["input"]) == test_suite["expected"]
             print(f"Test case {i+1}: Passed")

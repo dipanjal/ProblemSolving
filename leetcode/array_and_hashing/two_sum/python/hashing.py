@@ -4,7 +4,7 @@
 # SC: O(1) because we are using a dictionary to store the indices of the elements
 
 from typing import List
-from leetcode.array_and_hashing.two_sum import TEST_CASE
+from leetcode.array_and_hashing.two_sum.python import TEST_CASE
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:

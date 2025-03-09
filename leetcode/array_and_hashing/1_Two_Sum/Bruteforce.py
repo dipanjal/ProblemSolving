@@ -32,7 +32,7 @@ def test():
             "expected": [1, 2]
         },
         {
-            "input": {"nums": [3, 3], "target": 7},
+            "input": {"nums": [3, 3], "target": 6},
             "expected": [0, 1]
         }
     ]

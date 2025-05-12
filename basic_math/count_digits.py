@@ -31,8 +31,16 @@ def count_digits(n: int):
         count += 1
     return count
 
+
 # Time Complexity: O(1)
 def count_digits_opt(n: int) -> int:
+    """
+    Counts the number of digits in an integer n using logarithm.
+    This function uses the base-10 logarithm to determine the power of 10
+    then adds 1 to get the number of digits.
+    The time complexity is O(1) because it uses a mathematical property
+    to calculate the number of digits directly without iteration.
+    """
     if n == 0:
         return 1  # Special case for 0, which has 1 digit
     if n < 0:

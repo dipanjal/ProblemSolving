@@ -1,4 +1,5 @@
 # https://leetcode.com/problems/reverse-integer/
+import math
 MAX = 2147483647
 MIN = -2147483648
 class Solution:

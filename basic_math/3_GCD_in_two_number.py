@@ -22,6 +22,7 @@ if __name__ == "__main__":
     assert s.GCD(4, 6) == 2
     assert s.GCD(9, 8) == 1
     print(s.GCD(9, 9))
+    print(s.GCD(55, 10))
 
     # n1 = 9 
     # n2 = 12

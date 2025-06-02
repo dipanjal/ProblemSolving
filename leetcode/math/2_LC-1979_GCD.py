@@ -24,8 +24,6 @@ class Solution:
             return num2 if num1 == 0 else num1
     
     def findGCD(self, nums: List[int]) -> int:
-        # print("MAX", self.get_max(nums))
-        # print("MIN", self.get_min(nums))
         return self.gcd(
             num1=self.get_min(nums),
             num2=self.get_max(nums)

@@ -106,8 +106,8 @@ def main():
     obj.printList()
     obj.addAtTail(5)
     obj.printList()
-    val = obj.get(5)
-    print(val)
+    index = 5
+    print(f"GET INDEX: {index} | Val: {obj.get(index)}")
     obj.deleteAtIndex(6)
     obj.deleteAtIndex(4)
 
